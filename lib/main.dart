@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() => runApp(
       MaterialApp(
@@ -14,23 +15,43 @@ void main() => runApp(
         ),
       ),
     );
-class BallPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Ball( );
-  }
-}
 
-class Ball extends StatefulWidget {
+class BallPage extends StatefulWidget {
   @override
   _BallState createState() => _BallState();
+
 }
 
-class _BallState extends State<Ball> {
+
+
+class _BallState extends State<BallPage> {
+  static final randomBallState  = new Random();
+  int ballNumber = 1 ;
+
+   _BallState(){
+      randomizeBallState();
+   }
+
+   void randomizeBallState() {
+     ballNumber = randomBallState.nextInt(5) + 1;
+   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: Image.asset('images/ball1.png')),
+      child: Center(
+        child: FlatButton(
+          onPressed: () {
+            print("Eight Ball was pressed");
+            print(ballNumber);
+            setState(() {
+               randomizeBallState();
+            });
+            },
+          child: Image.asset('images/ball$ballNumber.png'), ),
+
+
+      ),
     );
   }
 }
